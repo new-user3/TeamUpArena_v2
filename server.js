@@ -10,32 +10,59 @@ const PORT = process.env.PORT || 3000;
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
-// Endpoint for handling USSD requests
-app.post('/ussd', async (req, res) => {
-    // Extract the Mpesa number from the request body
-    const { mpesaNumber } = req.body;
+// Endpoint for handling personal M-Pesa STK Push payment requests
+app.post('/personalMpesaStkPush', async (req, res) => {
+    // Extract required parameters from the request body
+    const { phone, amount } = req.body;
 
     try {
-        // Make a request to M-Pesa's API to send USSD pin prompt
-        const response = await axios.post('https://mpesa-provider-api.com/ussd/send', {
-            phone_number: mpesaNumber,
-            ussd_code: '*123#', // Example USSD code for pin prompt
-            message: 'Please enter your PIN:', // Example message content
-            // Add any additional parameters required by M-Pesa's API
+        // M-Pesa credentials and parameters
+        const consumerKey = 'lEwnLS8uzQaDFDTU3aUDXv8jAdaLcagPyuIOEVQDwTWSUgqN';
+        const consumerSecret = '6limIjyaUnifJlmP35bnCd8c8J7oArRJNXqGzb8YAzohLANZxNFnGet0bRGt3A7J';
+        const callBackUrl = 'https://morning-basin-87523.herokuapp.com/callback_url.php'; // Your callback URL
+        
+        // Get the timestamp
+        const timestamp = new Date().toISOString().replace(/[-:.]/g, '').slice(0, -3);
+        
+        // Generate the password (no need for businessShortCode)
+        const password = Buffer.from(consumerKey + consumerSecret + timestamp).toString('base64');
+
+        // M-Pesa access token request
+        const accessTokenResponse = await axios.get('https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials', {
+            auth: {
+                username: consumerKey,
+                password: consumerSecret
+            }
         });
 
-        // Check if the USSD pin prompt was successfully sent
-        if (response.data.success) {
-            // Respond with success message
-            res.json({ success: true, message: 'USSD pin prompt sent successfully' });
-        } else {
-            // Respond with error message if sending failed
-            res.json({ success: false, message: 'Failed to send USSD pin prompt' });
-        }
+        const accessToken = accessTokenResponse.data.access_token;
+
+        // M-Pesa STK Push request
+        const stkPushResponse = await axios.post('https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', {
+            BusinessShortCode: '', // No need for BusinessShortCode
+            Password: password,
+            Timestamp: timestamp,
+            TransactionType: 'CustomerPayBillOnline',
+            Amount: amount,
+            PartyA: phone,
+            PartyB: '', // No need for PartyB
+            PhoneNumber: phone,
+            CallBackURL: callBackUrl,
+            AccountReference: '2255',
+            TransactionDesc: 'Test Payment'
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+
+        // Send the STK Push response to the client
+        res.json(stkPushResponse.data);
     } catch (error) {
-        // Handle errors (e.g., network issues, API errors, etc.)
-        console.error('Error sending USSD pin prompt:', error.message);
-        res.status(500).json({ success: false, message: 'Internal server error' });
+        // Handle errors
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
 
