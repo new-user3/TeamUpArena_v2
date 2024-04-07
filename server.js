@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 // Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname)));
 
 // Endpoint for handling personal M-Pesa STK Push payment requests
 app.post('/personalMpesaStkPush', async (req, res) => {
