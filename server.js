@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
+const path = require('path'); // Import the path module
 
 // Create Express app
 const app = express();
@@ -9,6 +10,9 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
+
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Endpoint for handling personal M-Pesa STK Push payment requests
 app.post('/personalMpesaStkPush', async (req, res) => {
