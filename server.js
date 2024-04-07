@@ -19,7 +19,7 @@ app.post('/personalMpesaStkPush', async (req, res) => {
         // M-Pesa credentials and parameters
         const consumerKey = 'lEwnLS8uzQaDFDTU3aUDXv8jAdaLcagPyuIOEVQDwTWSUgqN';
         const consumerSecret = '6limIjyaUnifJlmP35bnCd8c8J7oArRJNXqGzb8YAzohLANZxNFnGet0bRGt3A7J';
-        const callBackUrl = 'https://morning-basin-87523.herokuapp.com/callback_url.php'; // Your callback URL
+        const callBackUrl = 'https://teamuparena-v2.onrender.com/'; // Your callback URL
         
         // Get the timestamp
         const timestamp = new Date().toISOString().replace(/[-:.]/g, '').slice(0, -3);
