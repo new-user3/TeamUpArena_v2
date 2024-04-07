@@ -19,6 +19,9 @@ app.post('/personalMpesaStkPush', async (req, res) => {
     // Extract required parameters from the request body
     const { phone, amount } = req.body;
 
+    console.log('Phone:', phone); // Log the value of phone
+    console.log('Amount:', amount); // Log the value of amount
+
     try {
         // M-Pesa credentials and parameters
         const consumerKey = 'lEwnLS8uzQaDFDTU3aUDXv8jAdaLcagPyuIOEVQDwTWSUgqN';
@@ -69,6 +72,7 @@ app.post('/personalMpesaStkPush', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 // Start the server
 app.listen(PORT, () => {
