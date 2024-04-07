@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+        /* Dark theme styles */
+        body {
+            background-color: #352F44;
+            color: #DBD8E3;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #5C5470;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #5C5470;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        nav a {
+            color: #DBD8E3;
+            text-decoration: none;
+        }
+        nav a img {
+            width: 30px;
+            height: 30px;
+        }
+        nav a:hover {
+            color: #FFFFFF;
+        }
+        .active {
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+        .matchmaking {
+            background-color: #483D5B;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        h2 {
+            color: #FFFFFF;
+        }
+        p {
+            color: #DBD8E3;
+        }
+        button {
+            background-color: #5C5470;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #3D3855;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our Matchmaking Platform</h1>
+    </header>
+    <div class="container">
+        <h2>Find Your Perfect Match</h2>
+        <p>Our matchmaking service helps you find the ideal opponent or teammate for your next game.</p>
+        <div class="matchmaking">
+            <h3>Start Matchmaking</h3>
+            <p>Choose your preferences and start searching for matches:</p>
+            <button onclick="findOpponent()">Find Opponent</button>
+            <button onclick="findTeammates()">Find Teammates</button>
+        </div>
+        <!-- Add the "Join Matchroom" button here -->
+        <a href="matchroom.html"><button>Join Matchroom</button></a>
+    </div>
+    <footer>
+        <nav>
+            <a href="index.html" class="active"><img src="home_icon.png" alt="Home"></a>
+            <a href="leagues.html"><img src="leagues_icon.png" alt="Leagues"></a>
+            <a href="matches.html"><img src="matches_icon.png" alt="Matches"></a>
+            <a href="profile.html"><img src="profile_icon.png" alt="Profile"></a>
+        </nav>
+    </footer>
+    <script>
+        function findOpponent() {
+            // Your code to handle finding an opponent goes here
+            alert("Finding opponent...");
+        }
+
+        function findTeammates() {
+            // Your code to handle finding teammates goes here
+            alert("Finding teammates...");
+        }
+    </script>
+</body>
+</html>

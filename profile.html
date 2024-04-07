@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        /* Dark theme styles */
+        body {
+            background-color: #352F44;
+            color: #DBD8E3;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #5C5470;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            margin-bottom: 60px; /* Adjusted to accommodate the height of the navigation */
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #5C5470;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #5C5470;
+        }
+        nav a {
+            color: #DBD8E3;
+            text-decoration: none;
+        }
+        nav a img {
+            width: 30px;
+            height: 30px;
+        }
+        nav a:hover {
+            color: #FFFFFF;
+        }
+        .active {
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+        button {
+            background-color: #5C5470;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #3D3855;
+        }
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Your Profile</h1>
+    </header>
+    <div class="container">
+        <div>
+            <img src="profile_picture.png" alt="Profile Picture" class="profile-picture">
+            <h2>John Doe</h2>
+            <p>Email: john.doe@example.com</p>
+            <p>Age: 30</p>
+        </div>
+        <div>
+            <h3>About Me</h3>
+            <p>Welcome to my profile! I'm a passionate gamer and sports enthusiast. When I'm not on the field playing soccer, you can find me online competing in thrilling video game matches. I enjoy meeting new people and forming strong bonds with teammates. Let's connect and take our gaming experience to the next level!</p>
+            <button>Edit Profile</button>
+            <button>Change Password</button>
+            <button onclick="confirmDelete()">Delete Account</button>
+        </div>
+    </div>
+    <footer>
+        <nav>
+            <a href="index.html"><img src="home_icon.png" alt="Home"></a>
+            <a href="leagues.html"><img src="leagues_icon.png" alt="Leagues"></a>
+            <a href="matches.html"><img src="matches_icon.png" alt="Matches"></a>
+            <a href="profile.html" class="active"><img src="profile_icon.png" alt="Profile"></a>
+        </nav>
+    </footer>
+    <script>
+        function confirmDelete() {
+            if (confirm("Are you sure you want to delete your account?")) {
+                // If user confirms, redirect to a page to handle account deletion
+                window.location.href = "delete_account.php"; // Replace with actual deletion endpoint
+            }
+        }
+    </script>
+</body>
+</html>

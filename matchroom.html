@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Room</title>
+    <style>
+        /* Dark theme styles */
+        body {
+            background-color: #352F44;
+            color: #DBD8E3;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #5C5470;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column; /* Changed flex-direction to column */
+            align-items: center; /* Center align items horizontally */
+        }
+        .matchmaking, .payment, .result, .success {
+            background-color: #483D5B;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #5C5470;
+            width: 45%;
+        }
+        .success {
+            display: none;
+        }
+        h2 {
+            color: #FFFFFF;
+        }
+        p {
+            color: #DBD8E3;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #5C5470;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #352F44;
+            color: #DBD8E3;
+        }
+        input[type="text"].score-input {
+            width: 40px;
+            text-align: center;
+        }
+        button {
+            background-color: #5C5470;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #3D3855;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #5C5470;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        nav a {
+            color: #DBD8E3;
+            text-decoration: none;
+        }
+        nav a img {
+            width: 30px;
+            height: 30px;
+        }
+        nav a:hover {
+            color: #FFFFFF;
+        }
+        .active {
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Match Room</h1>
+    </header>
+    <div class="container">
+        <div class="payment">
+            <h2>Enter Stake Amount</h2>
+            <input type="number" id="stakeAmount" placeholder="Enter stake amount">
+            <button onclick="confirmStake()">OK</button>
+            <h2>Enter Mpesa Number</h2>
+            <input type="text" id="mpesaNumber" placeholder="Enter Mpesa number">
+            <button onclick="proceedToPay()">Proceed to Pay</button>
+        </div>
+        <div class="success">
+            <h2>Scores</h2>
+            <p>You 
+                <input type="text" class="score-input" id="yourScore" maxlength="2">
+                - 
+                <input type="text" class="score-input" id="opponentScore" maxlength="2">
+                Opponent
+            </p>
+            <button>OK</button> <!-- OK button without logic -->
+        </div>
+        <div class="result">
+            <h2>Match Details</h2>
+            <p>Total Stake: <span id="totalStake">-</span></p>
+            <p>Winner Stake: <span id="winnerStake">-</span></p>
+        </div>
+    </div>
+    <footer>
+        <nav>
+            <a href="index.html" class="active"><img src="home_icon.png" alt="Home"></a>
+            <a href="leagues.html"><img src="leagues_icon.png" alt="Leagues"></a>
+            <a href="matches.html"><img src="matches_icon.png" alt="Matches"></a>
+            <a href="profile.html"><img src="profile_icon.png" alt="Profile"></a>
+        </nav>
+    </footer>
+    <script>
+        function confirmStake() {
+            var stakeAmount = document.getElementById("stakeAmount").value;
+            document.getElementById("totalStake").textContent = stakeAmount;
+
+            // Calculate 75% of the stake as the winner stake
+            var winnerStake = parseFloat(stakeAmount) * 0.75;
+            document.getElementById("winnerStake").textContent = winnerStake.toFixed(2);
+        }
+
+
+        
+        function proceedToPay() {
+            var mpesaNumber = document.getElementById("mpesaNumber").value;
+
+            // Make an HTTP request to your backend service
+            fetch('/ussd', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ mpesaNumber: mpesaNumber }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle response from backend service
+                alert(data.message); // Display message returned from backend
+                if (data.success) {
+                    // Payment was successful, update UI accordingly
+                    document.querySelector('.payment').style.display = 'none';
+                    document.querySelector('.success').style.display = 'block';
+                    updateScores();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error
+            });
+        }
+
+
+        function updateScores() {
+            // You can update the scores with actual values here if needed
+        }
+    </script>
+</body>
+</html>

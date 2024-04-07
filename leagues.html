@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leagues</title>
+    <style>
+        /* Dark theme styles */
+        body {
+            background-color: #352F44;
+            color: #DBD8E3;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #5C5470;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            overflow-x: auto; /* Allow horizontal scrolling if necessary */
+        }
+        .league-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .league-table th,
+        .league-table td {
+            border: 1px solid #5C5470;
+            padding: 10px;
+            text-align: center;
+        }
+        .league-table th {
+            background-color: #5C5470;
+            color: #FFFFFF;
+        }
+        .league-table tr:nth-child(even) {
+            background-color: #2A2438;
+        }
+        .league-table tr:nth-child(odd) {
+            background-color: #352F44;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #5C5470;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        nav a {
+            color: #DBD8E3;
+            text-decoration: none;
+            display: inline-block;
+        }
+        nav a img {
+            width: 30px;
+            height: 30px;
+        }
+        .active {
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        /* Responsive styles */
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .league-table {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>League Table</h1>
+    </header>
+    <div class="container">
+        <table class="league-table">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Played</th>
+                    <th>Won</th>
+                    <th>Drawn</th>
+                    <th>Lost</th>
+                    <th>Goals For</th>
+                    <th>Goals Against</th>
+                    <th>Goal Difference</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Team A</td>
+                    <td>5</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>10</td>
+                    <td>5</td>
+                    <td>+5</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>Team B</td>
+                    <td>5</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>8</td>
+                    <td>6</td>
+                    <td>+2</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>Team C</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>7</td>
+                    <td>4</td>
+                    <td>+3</td>
+                    <td>8</td>
+                </tr>
+                <!-- Add more teams as needed -->
+            </tbody>
+        </table>
+    </div>
+    <footer>
+        <nav>
+            <a href="index.html"><img src="home_icon.png" alt="Home"></a>
+            <a href="leagues.html" class="active"><img src="leagues_icon.png" alt="Leagues"></a>
+            <a href="matches.html"><img src="matches_icon.png" alt="Matches"></a>
+            <a href="profile.html"><img src="profile_icon.png" alt="Profile"></a>
+        </nav>
+    </footer>
+</body>
+</html>

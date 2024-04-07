@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matches</title>
+    <style>
+        /* Dark theme styles */
+        body {
+            background-color: #352F44;
+            color: #DBD8E3;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #5C5470;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .match-card {
+            background-color: #2A2438;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .match-card:hover {
+            transform: translateY(-5px);
+        }
+        .match-card h2 {
+            color: #FFFFFF;
+            margin-top: 0;
+        }
+        .match-card p {
+            color: #DBD8E3;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #5C5470;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        nav a {
+            color: #DBD8E3;
+            text-decoration: none;
+            display: inline-block;
+        }
+        nav a img {
+            width: 30px;
+            height: 30px;
+        }
+        .active {
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+        button {
+            background-color: #5C5470;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #3D3855;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Football Matches</h1>
+    </header>
+    <div class="container">
+        <div class="match-card">
+            <h2>Real Madrid vs Barcelona</h2>
+            <p>Date: April 10, 2024</p>
+            <p>Time: 20:00 GMT</p>
+            <p>Venue: Santiago Bernabéu Stadium</p>
+            <button onclick="showDetails('Real Madrid vs Barcelona')">View Details</button>
+        </div>
+        <div class="match-card">
+            <h2>Liverpool vs Manchester City</h2>
+            <p>Date: April 12, 2024</p>
+            <p>Time: 18:30 GMT</p>
+            <p>Venue: Anfield</p>
+            <button onclick="showDetails('Liverpool vs Manchester City')">View Details</button>
+        </div>
+        <div class="match-card">
+            <h2>Paris Saint-Germain vs Bayern Munich</h2>
+            <p>Date: April 15, 2024</p>
+            <p>Time: 19:45 GMT</p>
+            <p>Venue: Parc des Princes</p>
+            <button onclick="showDetails('Paris Saint-Germain vs Bayern Munich')">View Details</button>
+        </div>
+        <!-- Add more match cards as needed -->
+    </div>
+    <footer>
+        <nav>
+            <a href="index.html"><img src="home_icon.png" alt="Home"></a>
+            <a href="leagues.html"><img src="leagues_icon.png" alt="Leagues"></a>
+            <a href="matches.html" class="active"><img src="matches_icon.png" alt="Matches"></a>
+            <a href="profile.html"><img src="profile_icon.png" alt="Profile"></a>
+        </nav>
+    </footer>
+    <script>
+        function showDetails(match) {
+            alert("Details for " + match); // You can replace this with your own logic to display details
+        }
+    </script>
+</body>
+</html>
