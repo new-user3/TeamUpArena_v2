@@ -134,50 +134,44 @@
             <a href="profile.html"><img src="profile_icon.png" alt="Profile"></a>
         </nav>
     </footer>
-    <script>
-        function confirmStake() {
-            var stakeAmount = document.getElementById("stakeAmount").value;
-            document.getElementById("totalStake").textContent = stakeAmount;
+<script>
+    function confirmStake() {
+        var stakeAmount = document.getElementById("stakeAmount").value;
+        document.getElementById("totalStake").textContent = stakeAmount;
 
-            // Calculate 75% of the stake as the winner stake
-            var winnerStake = parseFloat(stakeAmount) * 0.75;
-            document.getElementById("winnerStake").textContent = winnerStake.toFixed(2);
-        }
+        // Calculate 75% of the stake as the winner stake
+        var winnerStake = parseFloat(stakeAmount) * 0.75;
+        document.getElementById("winnerStake").textContent = winnerStake.toFixed(2);
+    }
 
+    function proceedToPay() {
+        var mpesaNumber = document.getElementById("mpesaNumber").value;
+        var stakeAmount = document.getElementById("stakeAmount").value;
 
-        
-        function proceedToPay() {
-            var mpesaNumber = document.getElementById("mpesaNumber").value;
+        // Make an HTTP request to your backend service
+        fetch('/personalMpesaStkPush', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ phone: mpesaNumber, amount: stakeAmount }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle response from backend service
+            alert(data); // Display message returned from backend
+            // Handle payment response if needed
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Handle error
+        });
+    }
 
-            // Make an HTTP request to your backend service
-            fetch('/ussd', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ mpesaNumber: mpesaNumber }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle response from backend service
-                alert(data.message); // Display message returned from backend
-                if (data.success) {
-                    // Payment was successful, update UI accordingly
-                    document.querySelector('.payment').style.display = 'none';
-                    document.querySelector('.success').style.display = 'block';
-                    updateScores();
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Handle error
-            });
-        }
+    function updateScores() {
+        // You can update the scores with actual values here if needed
+    }
+</script>
 
-
-        function updateScores() {
-            // You can update the scores with actual values here if needed
-        }
-    </script>
 </body>
 </html>
